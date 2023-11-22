@@ -41,8 +41,13 @@ const ContactForm = () => {
 
             error[e.target.name] = "";
         }
-        if(e.target.name === 'firstname' && e.target.name === 'lastname'){
-            if(!validateFname(e.target.value,e.target.value)){
+        if(e.target.name === 'firstname'){
+            if(!validateFname(e.target.value)){
+                error[e.target.name] = 'Names lenght should be 15 characters '
+            }
+        }
+        if(e.target.name === 'lasttname'){
+            if(!validateFname(e.target.value)){
                 error[e.target.name] = 'Names lenght should be 15 characters '
             }
         }
@@ -61,14 +66,19 @@ const ContactForm = () => {
         }
         if(e.target.name === 'pincode'){
             if(!validatePincode(e.target.value)){
-                error[e.target.name] = 'Pincode Length should 6 only'
+                error[e.target.name] = 'Pincode Length should not exceed 6 characters'
             }
+        }
+        if(e.target.name === 'address'){
+           if(!validateAddress(e.target.value)){
+            error[e.target.name] = 'Address should not exceed 150 characters'
+           }
         }
         setformdata({ ...formdata, [e.target.name]: e.target.value, error });
 
     };
-    function validateFname(Fname , Lname){
-       if(Fname.length > 15 && Lname.length > 15)return false
+    function validateFname(name ){
+       if(name.length > 15 )return false
        return true
     }
     function validateEmail(email) {
@@ -81,6 +91,10 @@ const ContactForm = () => {
     }
 function validatePincode(pincode){
     if(pincode.length > 6) return false
+    return true
+}
+function validateAddress(address){
+    if(address.length > 150) return false
     return true
 }
 
