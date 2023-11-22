@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import "../Css/Cardstyle.css";
+import '../Css/table.css';
 const PostPage = () => {
   const [postsData, setpostsData] = useState([]);
 
@@ -14,34 +14,49 @@ const PostPage = () => {
     }
     getData()
   }, [])
-console.log(postsData);
+  console.log(postsData);
   return (
     <>
-     {
-     postsData && postsData.length > 0 ? 
-     
-        <div className="work-container">
+      <br />
+      <br />
+      <br />
 
-          <div className="project-container">
-            <div className="project-card">
+      <div className='tableContainer'>
+        <table>
+          <tr>
 
-              <h2 className="project-title"> </h2>
-              <div className="pro-details">
-             
+            <th>Title</th>
+            <th>Body</th>
+
+            <th>Actions</th>
+          </tr>
+          {postsData.map((data) => {
+
+            return (
+              <tbody key={data.id}>
+                <tr >
+                  <td>{data.title}</td>
 
 
-                <div className="pro-btns">
+                  <td>{data.body.split(" ").slice(0,50).join(" ")}</td>
+                  <td>
+                    <Link
+                      className='edit'
+                      to=" " state={data} >
+                      View
+                    </Link>
 
-                  <a href='/' target='_blank' className="btn">View</a>
-                </div>
-              </div>
-            </div>
+                  </td>
+                </tr>
+              </tbody>
+            )
+          })}
 
-          </div>
+        </table>
 
-        </div >
-    
-     :<></>}
+      </div>
+
+
 
     </>
   )
