@@ -10,21 +10,23 @@ const ContactForm = () => {
         lastname: "",
         email: "",
         phoneNo: "",
+        gender:"",
         dateOfBirth: "",
-        state:"",
-        city:"",
-        pincode:"",
-        address:"",
+        state: "",
+        city: "",
+        pincode: "",
+        address: "",
         error: {
             firstname: "",
-        lastname: "",
-        email: "",
-        phoneNo: "",
-        dateOfBirth: "",
-        state:"",
-        city:"",
-        pincode:"",
-        address:'',
+            lastname: "",
+            email: "",
+            phoneNo: "",
+            gender:"",
+            dateOfBirth: "",
+            state: "",
+            city: "",
+            pincode: "",
+            address: '',
         }
     };
     //State Variables 
@@ -41,13 +43,13 @@ const ContactForm = () => {
 
             error[e.target.name] = "";
         }
-        if(e.target.name === 'firstname'){
-            if(!validateFname(e.target.value)){
+        if (e.target.name === 'firstname') {
+            if (!validateFname(e.target.value)) {
                 error[e.target.name] = 'Names lenght should be 15 characters '
             }
         }
-        if(e.target.name === 'lasttname'){
-            if(!validateFname(e.target.value)){
+        if (e.target.name === 'lasttname') {
+            if (!validateFname(e.target.value)) {
                 error[e.target.name] = 'Names lenght should be 15 characters '
             }
         }
@@ -64,22 +66,22 @@ const ContactForm = () => {
                 error[e.target.name] = 'Invalid phone number'
             }
         }
-        if(e.target.name === 'pincode'){
-            if(!validatePincode(e.target.value)){
+        if (e.target.name === 'pincode') {
+            if (!validatePincode(e.target.value)) {
                 error[e.target.name] = 'Pincode Length should not exceed 6 characters'
             }
         }
-        if(e.target.name === 'address'){
-           if(!validateAddress(e.target.value)){
-            error[e.target.name] = 'Address should not exceed 150 characters'
-           }
+        if (e.target.name === 'address') {
+            if (!validateAddress(e.target.value)) {
+                error[e.target.name] = 'Address should not exceed 150 characters'
+            }
         }
         setformdata({ ...formdata, [e.target.name]: e.target.value, error });
 
     };
-    function validateFname(name ){
-       if(name.length > 15 )return false
-       return true
+    function validateFname(name) {
+        if (name.length > 15) return false
+        return true
     }
     function validateEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -89,14 +91,14 @@ const ContactForm = () => {
         if (phone.length < 10 || phone.length > 10) return false
         return true
     }
-function validatePincode(pincode){
-    if(pincode.length > 6) return false
-    return true
-}
-function validateAddress(address){
-    if(address.length > 150) return false
-    return true
-}
+    function validatePincode(pincode) {
+        if (pincode.length > 6) return false
+        return true
+    }
+    function validateAddress(address) {
+        if (address.length > 150) return false
+        return true
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -131,6 +133,42 @@ function validateAddress(address){
                             onChange={(e) => commonchange(e)}
                             value={formdata.phoneNo} />
                         <span style={{ color: "red" }}>{formdata.error.phoneNo}</span>
+                        <p style={{color:"black"}}>Gender :</p>
+                        <div className='gender'>
+                           
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="male"
+                                    checked={formdata.gender === 'male'}
+                                    onChange={(e) => commonchange(e)}
+                                />
+                                Male
+                            </label>
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="female"
+                                    checked={formdata.gender === 'female'}
+                                    onChange={(e) => commonchange(e)}
+                                />
+                                Female
+                            </label>
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="other"
+                                    checked={formdata.gender === 'other'}
+                                    onChange={(e) => commonchange(e)}
+                                />
+                                Other
+                            </label>
+                        </div>
                         <input
                             type='date'
                             placeholder='dd/mm/yyy'
@@ -145,12 +183,12 @@ function validateAddress(address){
                             onChange={(e) => commonchange(e)}
                             value={formdata.state}
                         >
-                          <option value="">Select state</option>
-                          <option value="tamilNadu">Tamil Nadu</option>
-                          <option value="Andra Pradhesh">Andra Pradhesh</option>
-                          <option value="Kerala">Kerala</option>
-                          <option value="karnataka">karnataka</option>
-                        </select>    
+                            <option value="">Select state</option>
+                            <option value="tamilNadu">Tamil Nadu</option>
+                            <option value="Andra Pradhesh">Andra Pradhesh</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="karnataka">karnataka</option>
+                        </select>
                         <span style={{ color: "red" }}>{formdata.error.state}</span>
                         <input placeholder="city" name="city"
                             type="text"
@@ -162,7 +200,7 @@ function validateAddress(address){
                             onChange={(e) => commonchange(e)}
                             value={formdata.pincode} />
                         <span style={{ color: "red" }}>{formdata.error.pincode}</span>
-                        <textarea placeholder='Adress' name='address' value={formdata.address} onChange={(e)=>commonchange(e) }/>
+                        <textarea placeholder='Adress' name='address' value={formdata.address} onChange={(e) => commonchange(e)} />
                         <span style={{ color: "red" }}>{formdata.error.address}</span>
                         <button className="login-btn" type='submit'>Submit</button>
 
